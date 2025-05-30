@@ -1,22 +1,46 @@
-import sys
-import subprocess
-import argparse
+# Game.py
+#
+# Данный файл должен проверить все
+# значимые ресурсы игры для
+# избежания ошибок.
+#
 
-from data import main
+# Imports
 
-parser = argparse.ArgumentParser(description="Запуск RPG игры")
+import logging
+import configparser
+
+# Variables
+
+log_level = {
+    "DEBUG": logging.DEBUG,
+    "INFO": logging.INFO,
+    "WARNING": logging.WARNING,
+    "ERROR": logging.ERROR,
+    "CRITICAL": logging.CRITICAL
+}
+
+#Function
+
+def get_now_level():
+    config = configparser.ConfigParser()
+    config.read("game.ini")
+
+    return config.get("logging", "level")
 
 
-parser.add_argument("-version", action="store_true", help="Версия игры")
-parser.add_argument("-run", action="store_true", help="Запустить игру")
+def check_levels():
+    logging.debug("DEBUG! debug")
+    logging.info("DEBUG! info")
+    logging.warning("DEBUG! warning")
+    logging.error("DEBUG! error")
+    logging.critical("DEBUG! critical")
 
+#Setup
 
-args = parser.parse_args()
+logging.basicConfig(filename="game.log", filemode="w", format="%(asctime)s - %(levelname)s -", level=log_level[get_now_level()])
 
+#Start
 
 if __name__ == "__main__":
-    if args.run:
-        print(1)
-        main.mainApp().run()
-    if args.version:
-        print()
+    check_levels()
