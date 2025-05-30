@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e10bd1a8-019f-42bd-8e24-23f1f1aac082" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game.ini" beforeDir="false" afterPath="$PROJECT_DIR$/game.ini" afterDir="false" />
+    <list default="true" id="e10bd1a8-019f-42bd-8e24-23f1f1aac082" name="Changes" comment="Добавление проверки отображение левелов и синхранизация левела с файлом конфинга.&#10;&#10;Версия: 0.0.1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/imports/Iall.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scripts/menus/Mmain.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.ini" beforeDir="false" afterPath="$PROJECT_DIR$/game.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.log" beforeDir="false" afterPath="$PROJECT_DIR$/game.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +105,19 @@
       <option name="presentableId" value="Default" />
       <updated>1748636483692</updated>
     </task>
+    <task id="LOCAL-00001" summary="Добавление проверки отображение левелов и синхранизация левела с файлом конфинга.&#10;&#10;Версия: 0.0.1">
+      <option name="closed" value="true" />
+      <created>1748638224387</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1748638224387</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавление проверки отображение левелов и синхранизация левела с файлом конфинга.&#10;&#10;Версия: 0.0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавление проверки отображение левелов и синхранизация левела с файлом конфинга.&#10;&#10;Версия: 0.0.1" />
   </component>
 </project>

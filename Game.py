@@ -7,8 +7,10 @@
 
 # Imports
 
+import sys
 import logging
 import configparser
+import data.main
 
 # Variables
 
@@ -20,7 +22,7 @@ log_level = {
     "CRITICAL": logging.CRITICAL
 }
 
-#Function
+# Function
 
 def get_now_level():
     config = configparser.ConfigParser()
@@ -36,11 +38,28 @@ def check_levels():
     logging.error("DEBUG! error")
     logging.critical("DEBUG! critical")
 
+
 #Setup
 
-logging.basicConfig(filename="game.log", filemode="w", format="%(asctime)s - %(levelname)s -", level=log_level[get_now_level()])
+logging.basicConfig(
+    # filename="game.log",
+    # filemode="w",
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    level=log_level[get_now_level()],
+    handlers=[
+        logging.FileHandler("game.log", mode="w", encoding="utf-8"),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+
+logger = logging.getLogger("main")
+
+logging.info("Логгер был инициализирован.")
 
 #Start
 
 if __name__ == "__main__":
+    logger.info(f"Проверка уровень дебага. Текущий {get_now_level()}")
     check_levels()
+    logger.info("Переход в data/main.py")
+    data.main.__start__(logger)
