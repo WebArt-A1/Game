@@ -1,0 +1,11 @@
+{
+  "Main-Menu": {
+    "Label": "Shadow of a Lost Soul",
+    "NewGame": "New Game",
+    "Continue": "Continue",
+    "Load": "Load Game",
+    "Options": "Settings",
+    "Authors": "Credits",
+    "Exit": "Exit"
+  }
+}
