@@ -2,6 +2,9 @@
 
 # Imports
 from kivy.logger import Logger
+
+from Game import logger
+
 Logger.handlers.clear()  # Убираем логгер Kivy
 
 from kivy.app import App
@@ -14,6 +17,10 @@ from kivy.uix.screenmanager import ScreenManager
 import configparser
 import win32con
 import win32gui
+
+
+from kivy.clock import Clock
+
 
 from data.menus.MMain import MainScreen
 
@@ -44,61 +51,91 @@ class mainApp(App):
 
     # Functions
 
-    def __init__(self, logger, FullPriority, **kwargs):
+    def __init__(self, logger, FullPriority, AllText, **kwargs):
         super().__init__(**kwargs)
+
         self.logger = logger
+        self.AllText = AllText
+
+        # <editor-fold desc="Logging">
         self.logger.info("__init__ приложения выполнен")
-        self.sm = ScreenManager()
-        self.logger.info("ScreenManager создан")
+
+        # </editor-fold>
 
         # Window.resizable = False
         # make_window_fixed_size()
 
         try:
+            # <editor-fold desc="Logging">
             self.logger.info("Загрузка настроек из конфига.")
+
+            # </editor-fold>
+
             config = configparser.ConfigParser()
             config.read("game.ini")
             res = config.get("graphics", "resolution")
-            self.logger.info(f"Текущее разрешение окна: {res}.")
+
+            # <editor-fold desc="Logging">
+            self.logger.debug(f"Текущее разрешение окна: {res}.")
+            # </editor-fold>
 
             isFull = IS_FULLSCREEN[config.get("graphics", "fullscreen")]
 
-            Window.size  = list(map(int, res.split("x")))
+            Window.size = list(map(int, res.split("x")))
+
+            Window.fullscreen = isFull if FullPriority is None else FullPriority
             if FullPriority is None:
-                Window.fullscreen = isFull
-                self.logger.info(f"Текущий режим окна: {isFull}.")
+                # <editor-fold desc="Logging">
+                self.logger.debug(f"Текущий режим окна: {isFull}.")
+                # </editor-fold>
             else:
-                Window.fullscreen = FullPriority
+                # <editor-fold desc="Logging">
                 self.logger.info("Использование настройки из параметра.")
+                # </editor-fold>
 
         except Exception as e:
+            # <editor-fold desc="Logging">
             self.logger.info(f"При четение конфига произошла ошибка: {e}.")
             self.logger.info("Установка стандартных настроек.")
+            # </editor-fold>
 
             Window.size = (1280, 720)
+            Window.fullscreen = False if FullPriority is None else FullPriority
 
-            if FullPriority is None:
-                Window.fullscreen = False
-
-            else:
-                Window.fullscreen = FullPriority
+            if FullPriority is not None:
+                # <editor-fold desc="Logging">
                 self.logger.info("Использование настройки из параметра.")
+                # </editor-fold>
 
+        self.sm = ScreenManager()
+        # <editor-fold desc="Logging">
+        self.logger.debug("ScreenManager создан")
+        # </editor-fold>
+        self.title = "Game"
+        Clock.schedule_once(self._build, 0)
+
+
+    def _build(self, dt):
+
+        def back_button(it):
+            self.logger.debug(f"Кнопка нажата: {it.action_id}.")
+            self.logger.info("Обработка нажатия кнопки.")
+
+        MMain = MainScreen(logger=self.logger, AllText=self.AllText, call_back=back_button, name='Main')
+
+        self.sm.add_widget(MMain)
+        self.sm.current = 'Main'
+        # <editor-fold desc="Logging">
+        self.logger.info("Метод build запущен")
+        # </editor-fold>
+        return self.sm
 
     def build(self):
-
-        self.sm.add_widget(MainScreen(name='Main'))
-
-        self.sm.current = 'Main'
-
-        self.title = "Test 123"
-
-        self.logger.info("Метод build запущен")
         return self.sm
 
 
 # Start
 
-def __start__(logger, FullscreenPriority):
+def __start__(logger, FullscreenPriority, Text):
     logger.info("main.py: старт приложения")
-    mainApp(logger=logger, FullPriority=FullscreenPriority).run()
+    mainApp(logger=logger, FullPriority=FullscreenPriority, AllText=Text).run()

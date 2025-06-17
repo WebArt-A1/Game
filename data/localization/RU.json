@@ -1,4 +1,7 @@
 {
+  "General": {
+    "Font-Path": "data/localization/fonts/HQYSaversText.ttf"
+  },
   "Main-Menu": {
     "Label": "Тень потерянной души",
     "NewGame": "Новая игра",

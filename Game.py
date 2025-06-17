@@ -36,6 +36,7 @@ def setup_lang(language):
     try:
         with open(f"data/localization/{language}.json", 'r', encoding='utf-8') as f:
             logger.info("Получение языкавого файла.")
+            logger.debug(f"Текущий установленный язык: {language}")
             return json.load(f)
 
     except Exception as e:
@@ -65,6 +66,7 @@ def load_language(config_path="game.ini", default_lang="RU"):
 
         except Exception as e:
             logger.warning(f"Завершение программы с ошибкой: {e}")
+            return None
 
 
 def logger_setup():
@@ -112,16 +114,16 @@ parser = argparse.ArgumentParser(description="Запуск игры")
 if __name__ == "__main__":
     logger.info(f"Текущий уровень логгера: {get_now_level()}")
     check_levels()
-    logger.info("Переход в data/main.py")
 
-    logger.info("Чтение разных параметров.")
+    logger.info("Чтение входящих параметров.")
     parser.add_argument("--fullscreen", choices=["true", "false", "auto", "fake"], help="Полноэкранный режим.")
 
     args = parser.parse_args()
-    logger.info(f"Передано: {args.fullscreen}")
+    logger.debug(f"Передано: {args.fullscreen}")
 
     logger.info("Создание объекта со всем текстом.")
 
     AllText = load_language()
 
-    data.main.__start__(logger, args.fullscreen)
+    logger.info("Переход в data/main.py")
+    data.main.__start__(logger, args.fullscreen, AllText)
